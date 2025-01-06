@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6i8y65q3gut8"]
+
+[ext_resource type="PackedScene" uid="uid://bcf0ty4ju5k3u" path="res://scenes/Farm.tscn" id="1_e2l1s"]
+[ext_resource type="PackedScene" uid="uid://difqrj14d3kxa" path="res://scenes/PlayerCharacter.tscn" id="2_kwexl"]
+
+[sub_resource type="GDScript" id="GDScript_hp0le"]
+script/source = "extends Camera2D
+
+### Base Size of the Game ###
+const baseSize = Vector2(256,384)
+
+### Black Bars ###
+var blackBarSize = Vector2()
+
+
+func _ready():
+    var cameraSize = get_best_camera_size(OS.window_size)
+	
+	set_zoom(Vector2((cameraSize.x/baseSize.x),(cameraSize.y/baseSize.y)))
+    
+    blackBarSize = (cameraSize − baseSize)/2
+
+
+func get_best_camera_size(screenSize):
+	var bestResizeX = floor(screenSize.x/baseSize.x)
+	var bestResizeY = floor(screenSize.y/baseSize.y)
+    
+    if (bestResizeX <= bestResizeY):
+        return screenSize / bestResizeX
+    return screenSize / bestResizeY
+
+
+#Draw the black bars on the sides to hide other elements
+#you can also add other drawable elements here
+#or put your Hud here for other device that have bottom space
+func _draw():
+    var black = Color(0,0,0,1)
+
+	draw_rect(Rect2(Vector2(-blackBarSize.x-(baseSize.x/2),-(baseSize.y/2)),Vector2(256+(blackBarSize.x*2),-blackBarSize.y)),black)
+	draw_rect(Rect2(Vector2(-blackBarSize.x-(baseSize.x/2),(baseSize.y/2)),Vector2(256+(blackBarSize.x*2),blackBarSize.y)),black)
+	draw_rect(Rect2(Vector2(-(baseSize.x/2),-(baseSize.y/2)),Vector2(-blackBarSize.x,baseSize.y)),black)
+	draw_rect(Rect2(Vector2((baseSize.x/2),-(baseSize.y/2)),Vector2(blackBarSize.x,baseSize.y)),black)"
+
+[node name="Game" type="Node2D"]
+
+[node name="Farm" parent="." instance=ExtResource("1_e2l1s")]
+position = Vector2(0, -1)
+
+[node name="Player" parent="." instance=ExtResource("2_kwexl")]
+position = Vector2(153, 13)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(3, 3)
+limit_left = -360
+limit_top = -190
+limit_right = 430
+limit_bottom = 230
+limit_smoothed = true
+position_smoothing_enabled = true
+script = SubResource("GDScript_hp0le")

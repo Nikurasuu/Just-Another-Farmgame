@@ -1,0 +1,128 @@
+[gd_scene load_steps=17 format=3 uid="uid://ce2s2wx7os3r7"]
+
+[ext_resource type="Script" path="res://scripts/Chicken.cs" id="1_e5847"]
+[ext_resource type="Texture2D" uid="uid://c0d1srln6d20o" path="res://assets/Farm Animals- Tiny Asset Pack/Chicken/Baby Chicken White.png" id="2_sqdf7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwgcw"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pldta"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyw47"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n6ei"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6rsb"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnpxh"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7187"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1avf8"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rquii"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tycih"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdhch"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lggtd"]
+atlas = ExtResource("2_sqdf7")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cwyle"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwgcw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pldta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyw47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n6ei")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6rsb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnpxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7187")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1avf8")
+}],
+"loop": true,
+"name": &"walking_down",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rquii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tycih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdhch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lggtd")
+}],
+"loop": true,
+"name": &"walking_up",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ell0c"]
+radius = 7.0
+
+[node name="Chicken" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 65
+script = ExtResource("1_e5847")
+metadata/lazyness = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cwyle")
+animation = &"walking_up"
+frame_progress = 0.687585
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_ell0c")
+
+[node name="MovingTimer" type="Timer" parent="."]
+autostart = true
