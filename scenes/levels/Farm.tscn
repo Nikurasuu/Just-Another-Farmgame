@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://bcf0ty4ju5k3u"]
+[gd_scene load_steps=5 format=4 uid="uid://bcf0ty4ju5k3u"]
 
 [ext_resource type="TileSet" uid="uid://uuqsq03vqpmp" path="res://scenes/tilesets/Ground.tres" id="1_qfdqw"]
 [ext_resource type="TileSet" uid="uid://f4lkljc4p5qb" path="res://scenes/tilesets/Decorations.tres" id="2_5md4b"]
 [ext_resource type="PackedScene" uid="uid://ce2s2wx7os3r7" path="res://scenes/entities/Chicken.tscn" id="3_ag0pt"]
+[ext_resource type="TileSet" uid="uid://cdit2sidd584f" path="res://scenes/tilesets/Interactions.tres" id="3_p68h4"]
 
 [node name="Farm" type="Node2D"]
 
@@ -20,7 +21,7 @@ tile_set = ExtResource("2_5md4b")
 
 [node name="Interactions" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAAOAP//AQADAAAAAAAQAP//AQAFAAAAAAAPAP//AQAEAAAAAAA=")
-tile_set = ExtResource("2_5md4b")
+tile_set = ExtResource("3_p68h4")
 
 [node name="Chicken" parent="." instance=ExtResource("3_ag0pt")]
 position = Vector2(273, -65)
