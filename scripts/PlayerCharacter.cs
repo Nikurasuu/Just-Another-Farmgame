@@ -14,6 +14,8 @@ public partial class PlayerCharacter : CharacterBody2D {
     private AnimatedSprite2D animatedSprite;
     private Vector2 lastDirection = Vector2.Down;
 
+    private RayCast2D interactionCast;
+
     private readonly Dictionary<Vector2, string> animationNames = new Dictionary<Vector2, string> {
         { Vector2.Up, "up" },
         { Vector2.Down, "down" },
@@ -24,6 +26,7 @@ public partial class PlayerCharacter : CharacterBody2D {
     public override void _Ready() {
         animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         elevationTileMapLayer = GetNode<TileMapLayer>("../Level/Elevations");
+        interactionCast = GetNode<RayCast2D>("InteractionCast");
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -59,12 +62,30 @@ public partial class PlayerCharacter : CharacterBody2D {
                 PlayWalkingAnimation(direction);
             }
             Velocity = direction.Normalized() * speed;
+
+            UpdateInteractionCastRotation(direction);
         } else {
             Velocity = Vector2.Zero;
             PlayIdleAnimation();
         }
 
         MoveAndSlide();
+    }
+
+    private void UpdateInteractionCastRotation(Vector2 direction)
+    {
+        // Ugly solution to prioritize the side movement, but it works
+        // Otherwise the interactionCast would be rotated to the direction
+        // that was first pressed
+        if (direction.X < 0) {
+            interactionCast.RotationDegrees = 180;
+        } else if (direction.X > 0) {
+            interactionCast.RotationDegrees = 0;
+        } else if (direction == Vector2.Up) {
+            interactionCast.RotationDegrees = -90;
+        } else if (direction == Vector2.Down) {
+            interactionCast.RotationDegrees = 90;
+        }
     }
 
     private bool CheckIfElevated() {

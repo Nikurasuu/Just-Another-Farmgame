@@ -120,7 +120,6 @@ animation = &"walking_up"
 frame_progress = 0.687585
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(1, 1)
 shape = SubResource("CircleShape2D_ell0c")
 
