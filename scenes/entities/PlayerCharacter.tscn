@@ -1,10 +1,10 @@
 [gd_scene load_steps=42 format=3 uid="uid://difqrj14d3kxa"]
 
-[ext_resource type="Script" path="res://scripts/PlayerCharacter.cs" id="1_mdnnx"]
+[ext_resource type="Script" path="res://scripts/entities/PlayerCharacter.cs" id="1_c51fa"]
 [ext_resource type="Texture2D" uid="uid://bjy66q8ruio3i" path="res://assets/Character and Portrait - Tiny Asset Pack/Character/Premade/Tori 2/Walk.png" id="2_0y0dh"]
 [ext_resource type="Texture2D" uid="uid://cncwy6xd2jw56" path="res://assets/Character and Portrait - Tiny Asset Pack/Character/Premade/Tori 2/Idle.png" id="2_scarl"]
 [ext_resource type="Texture2D" uid="uid://c7i0ip6a1pfbv" path="res://assets/Character and Portrait - Tiny Asset Pack/Character/Premade/Tori 2/Walking.png" id="4_6pu1e"]
-[ext_resource type="Script" path="res://scripts/InteractionHandler.cs" id="5_ah10f"]
+[ext_resource type="Script" path="res://scripts/handlers/InteractionHandler.cs" id="5_xtcod"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i8bgi"]
 atlas = ExtResource("2_0y0dh")
@@ -323,7 +323,7 @@ height = 15.0
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 201
-script = ExtResource("1_mdnnx")
+script = ExtResource("1_c51fa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mf4yj")
@@ -338,6 +338,7 @@ debug_color = Color(0, 0.6, 0.7, 0.42)
 [node name="InteractionCast" type="RayCast2D" parent="."]
 target_position = Vector2(16, 0)
 collision_mask = 12
+hit_from_inside = true
 
 [node name="InteractionHandler" type="Node" parent="."]
-script = ExtResource("5_ah10f")
+script = ExtResource("5_xtcod")

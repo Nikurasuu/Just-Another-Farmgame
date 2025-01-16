@@ -1,12 +1,12 @@
 [gd_resource type="TileSet" load_steps=15 format=3 uid="uid://f4lkljc4p5qb"]
 
-[ext_resource type="Texture2D" uid="uid://c1akd2hhlryb1" path="res://Assets/assets/Exterior - Tiny Asset Pack/Fence and Bridge/Bridge Wood 1.png" id="1_kyf3h"]
-[ext_resource type="Texture2D" uid="uid://dmniba011lb4d" path="res://Assets/assets/Exterior - Tiny Asset Pack/Fence and Bridge/Fence Wood.png" id="2_djwkp"]
-[ext_resource type="Texture2D" uid="uid://bqviki380nb7q" path="res://Assets/assets/Farm - Tiny Asse Pack/Props/Summer/PropsWater Stone.png" id="2_dyaii"]
-[ext_resource type="Texture2D" uid="uid://b0qk8f2lcgkrd" path="res://Assets/assets/Farm - Tiny Asse Pack/Props/Summer/PropsWater Summer.png" id="3_sk7li"]
-[ext_resource type="Texture2D" uid="uid://0j1exq8yp3gi" path="res://Assets/assets/Farm - Tiny Asse Pack/Props/Summer/Stones Summer.png" id="4_2y45g"]
-[ext_resource type="Texture2D" uid="uid://ca5pl7e6dip1w" path="res://Assets/assets/Farm - Tiny Asse Pack/Tree/Common/Mahogany Tree.png" id="5_mxvdj"]
-[ext_resource type="Texture2D" uid="uid://dwmk46wq3ftk1" path="res://Assets/assets/Farm - Tiny Asse Pack/Tileset/Tileset Grass Spring.png" id="6_nr8ek"]
+[ext_resource type="Texture2D" uid="uid://c1akd2hhlryb1" path="res://assets/Exterior - Tiny Asset Pack/Fence and Bridge/Bridge Wood 1.png" id="1_kyf3h"]
+[ext_resource type="Texture2D" uid="uid://dmniba011lb4d" path="res://assets/Exterior - Tiny Asset Pack/Fence and Bridge/Fence Wood.png" id="2_djwkp"]
+[ext_resource type="Texture2D" uid="uid://bqviki380nb7q" path="res://assets/Farm - Tiny Asse Pack/Props/Summer/PropsWater Stone.png" id="2_dyaii"]
+[ext_resource type="Texture2D" uid="uid://b0qk8f2lcgkrd" path="res://assets/Farm - Tiny Asse Pack/Props/Summer/PropsWater Summer.png" id="3_sk7li"]
+[ext_resource type="Texture2D" uid="uid://0j1exq8yp3gi" path="res://assets/Farm - Tiny Asse Pack/Props/Summer/Stones Summer.png" id="4_2y45g"]
+[ext_resource type="Texture2D" uid="uid://ca5pl7e6dip1w" path="res://assets/Farm - Tiny Asse Pack/Tree/Common/Mahogany Tree.png" id="5_mxvdj"]
+[ext_resource type="Texture2D" uid="uid://dwmk46wq3ftk1" path="res://assets/Farm - Tiny Asse Pack/Tileset/Tileset Grass Spring.png" id="6_nr8ek"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_najmw"]
 texture = ExtResource("1_kyf3h")

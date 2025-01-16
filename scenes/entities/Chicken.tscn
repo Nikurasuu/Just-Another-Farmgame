@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://ce2s2wx7os3r7"]
 
-[ext_resource type="Script" path="res://scripts/Chicken.cs" id="1_e5847"]
+[ext_resource type="Script" path="res://scripts/entities/Chicken.cs" id="1_8yes2"]
 [ext_resource type="Texture2D" uid="uid://c0d1srln6d20o" path="res://assets/Farm Animals- Tiny Asset Pack/Chicken/Baby Chicken White.png" id="2_sqdf7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gwgcw"]
@@ -111,8 +111,10 @@ radius = 7.0
 [node name="Chicken" type="CharacterBody2D"]
 collision_layer = 20
 collision_mask = 65
-script = ExtResource("1_e5847")
+script = ExtResource("1_8yes2")
 metadata/lazyness = 0
+metadata/petable = true
+metadata/alreadyPetted = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cwyle")

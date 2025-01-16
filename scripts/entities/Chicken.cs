@@ -15,6 +15,9 @@ public partial class Chicken : CharacterBody2D {
     private Timer movingTimer;
     private static Random random = new Random();
 
+    [Signal]
+    public delegate void PetEventHandler();
+
     public override void _Ready() {
         lazyness = this.GetMeta("lazyness").AsInt32();
 
@@ -22,6 +25,8 @@ public partial class Chicken : CharacterBody2D {
 
         movingTimer = GetNode<Timer>("MovingTimer");
         movingTimer.Timeout += OnMovingTimerTimeout;
+
+        Pet += GetPet;
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -80,6 +85,15 @@ public partial class Chicken : CharacterBody2D {
             } else {
                 animatedSprite.FlipH = false;
             }
+        }
+    }
+
+    private void GetPet() {
+        if(this.GetMeta("alreadyPetted").AsBool()) {
+            GD.Print("Chicken already petted");
+        } else {
+            this.SetMeta("alreadyPetted", true);
+            GD.Print("Chicken petted");
         }
     }
 }
