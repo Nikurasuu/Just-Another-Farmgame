@@ -2,7 +2,7 @@ using Godot;
 using System.Collections.Generic;
 
 public partial class PlayerCharacter : CharacterBody2D {
-	private const float BASE_SPEED = 100;
+	private const float BASE_SPEED = 70;
 	private const float RUNNING_MULTIPLIER = 1.8f;
 
 	private float speed = BASE_SPEED;
