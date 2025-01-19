@@ -11,10 +11,9 @@ public partial class PlayerCharacter : CharacterBody2D {
 	private bool hasStamina = true;
 
 	private TileMapLayer elevationTileMapLayer;
-	private bool isAboveGround = false;
-
 	private AnimatedSprite2D animatedSprite;
-	private Vector2 lastDirection = Vector2.Down;
+	private Vector2 direction;
+	private Vector2 lastDirection;
 
 	private RayCast2D interactionCast;
 
@@ -35,54 +34,35 @@ public partial class PlayerCharacter : CharacterBody2D {
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		Vector2 direction = Input.GetVector("walking_left", "walking_right", "walking_up", "walking_down");
-
-		isAboveGround = CheckIfElevated();
+		direction = Input.GetVector("walking_left", "walking_right", "walking_up", "walking_down");
 		hasStamina = stamina > 0;
 		isMoving = direction != Vector2.Zero;
+		isRunning = Input.IsActionPressed("running") && isMoving;
 
-		if (isAboveGround) {
+		if (isAboveGround()) {
 			this.SetCollisionMaskValue(1, false);
 		}  else {
 			this.SetCollisionMaskValue(1, true);
 		}
 
-		isRunning = Input.IsActionPressed("running");
+		UpdateSpeed();
+		UpdateStamina();
+		UpdatePlayerAnimation();
+
+		MoveAndSlide();
+	}
+
+	private void UpdateSpeed()
+	{
 		if (isRunning && hasStamina) {
 			speed = base_speed * RUNNING_MULTIPLIER;
 		} else {
 			speed = base_speed;
 		}
-
-		UpdateStamina();
-
-		if (direction != Vector2.Zero) {
-			lastDirection = direction;
-
-			if (direction.X < 0) {
-				animatedSprite.FlipH = true;
-			} else if (direction.X >= 0) {
-				animatedSprite.FlipH = false;
-			}
-
-			if (isRunning && hasStamina) {
-				PlayRunningAnimation(direction);
-			} else {
-				PlayWalkingAnimation(direction);
-			}
-			Velocity = direction.Normalized() * speed;
-
-			UpdateInteractionCastRotation(direction);
-		} else {
-			Velocity = Vector2.Zero;
-			PlayIdleAnimation();
-		}
-
-		MoveAndSlide();
 	}
 
 	private void UpdateStamina() {
-		if (isRunning && hasStamina && isMoving) {
+		if (isRunning && hasStamina) {
 			DecreaseStamina();
 		} else if (!isRunning) {
 			IncreaseStamina();
@@ -119,7 +99,7 @@ public partial class PlayerCharacter : CharacterBody2D {
 		}
 	}
 
-	private bool CheckIfElevated() {
+	private bool isAboveGround() {
 		Vector2 playerPosition = Position;
 		Vector2I cell = elevationTileMapLayer.LocalToMap(playerPosition);
 
@@ -132,6 +112,30 @@ public partial class PlayerCharacter : CharacterBody2D {
 		}
 
 		return false;
+	}
+
+	private void UpdatePlayerAnimation() {
+		if (direction != Vector2.Zero) {
+			lastDirection = direction;
+
+			if (direction.X < 0) {
+				animatedSprite.FlipH = true;
+			} else if (direction.X >= 0) {
+				animatedSprite.FlipH = false;
+			}
+
+			if (isRunning && hasStamina) {
+				PlayRunningAnimation(direction);
+			} else {
+				PlayWalkingAnimation(direction);
+			}
+			Velocity = direction.Normalized() * speed;
+
+			UpdateInteractionCastRotation(direction);
+		} else {
+			Velocity = Vector2.Zero;
+			PlayIdleAnimation();
+		}
 	}
 
 	private void PlayIdleAnimation() {
