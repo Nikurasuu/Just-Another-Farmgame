@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://sop6idkdq532"]
+
+[ext_resource type="Script" path="res://scripts/MainInterface.cs" id="1_t6yj4"]
+[ext_resource type="Texture2D" uid="uid://b57hmd3bofuy3" path="res://assets/UI - Tiny Asset Pack/HUD.png" id="1_xmlmj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o054f"]
+atlas = ExtResource("1_xmlmj")
+region = Rect2(51, 53, 42, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdepw"]
+atlas = ExtResource("1_xmlmj")
+region = Rect2(54, 24, 27, 3)
+
+[node name="MainInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t6yj4")
+
+[node name="StaminaBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 50.0
+offset_bottom = 17.0
+scale = Vector2(4, 4)
+value = 60.0
+texture_under = SubResource("AtlasTexture_o054f")
+texture_progress = SubResource("AtlasTexture_mdepw")
+texture_progress_offset = Vector2(2, 3)

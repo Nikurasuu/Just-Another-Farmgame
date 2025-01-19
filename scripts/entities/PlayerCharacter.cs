@@ -2,11 +2,13 @@ using Godot;
 using System.Collections.Generic;
 
 public partial class PlayerCharacter : CharacterBody2D {
-	private const float BASE_SPEED = 70;
+	private float base_speed = 70;
 	private const float RUNNING_MULTIPLIER = 1.8f;
-
-	private float speed = BASE_SPEED;
+	private float speed;
+	private bool isMoving = false;
 	private bool isRunning = false;
+	private int stamina = 100;
+	private bool hasStamina = true;
 
 	private TileMapLayer elevationTileMapLayer;
 	private bool isAboveGround = false;
@@ -24,6 +26,9 @@ public partial class PlayerCharacter : CharacterBody2D {
 	};
 
 	public override void _Ready() {
+		base_speed = this.GetMeta("speed").AsInt32();
+		stamina = this.GetMeta("stamina").AsInt32();
+
 		animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		elevationTileMapLayer = GetNode<TileMapLayer>("../Level/Elevations");
 		interactionCast = GetNode<RayCast2D>("InteractionCast");
@@ -33,6 +38,8 @@ public partial class PlayerCharacter : CharacterBody2D {
 		Vector2 direction = Input.GetVector("walking_left", "walking_right", "walking_up", "walking_down");
 
 		isAboveGround = CheckIfElevated();
+		hasStamina = stamina > 0;
+		isMoving = direction != Vector2.Zero;
 
 		if (isAboveGround) {
 			this.SetCollisionMaskValue(1, false);
@@ -41,11 +48,13 @@ public partial class PlayerCharacter : CharacterBody2D {
 		}
 
 		isRunning = Input.IsActionPressed("running");
-		if (isRunning) {
-			speed = BASE_SPEED * RUNNING_MULTIPLIER;
+		if (isRunning && hasStamina) {
+			speed = base_speed * RUNNING_MULTIPLIER;
 		} else {
-			speed = BASE_SPEED;
+			speed = base_speed;
 		}
+
+		UpdateStamina();
 
 		if (direction != Vector2.Zero) {
 			lastDirection = direction;
@@ -56,7 +65,7 @@ public partial class PlayerCharacter : CharacterBody2D {
 				animatedSprite.FlipH = false;
 			}
 
-			if (isRunning) {
+			if (isRunning && hasStamina) {
 				PlayRunningAnimation(direction);
 			} else {
 				PlayWalkingAnimation(direction);
@@ -70,6 +79,28 @@ public partial class PlayerCharacter : CharacterBody2D {
 		}
 
 		MoveAndSlide();
+	}
+
+	private void UpdateStamina() {
+		if (isRunning && hasStamina && isMoving) {
+			DecreaseStamina();
+		} else if (!isRunning) {
+			IncreaseStamina();
+		}
+	}
+
+	private void DecreaseStamina() {
+		if (stamina > 0) {
+			stamina -= 1;
+			this.SetMeta("stamina", stamina);
+		}
+	}
+
+	private void IncreaseStamina() {
+		if (stamina < 100) {
+			stamina += 1;
+			this.SetMeta("stamina", stamina);
+		}
 	}
 
 	private void UpdateInteractionCastRotation(Vector2 direction)
