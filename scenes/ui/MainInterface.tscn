@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://sop6idkdq532"]
 
 [ext_resource type="Script" path="res://scripts/MainInterface.cs" id="1_t6yj4"]
-[ext_resource type="Texture2D" uid="uid://b57hmd3bofuy3" path="res://assets/UI - Tiny Asset Pack/HUD.png" id="1_xmlmj"]
+[ext_resource type="Texture2D" uid="uid://dxv44dkqec4h4" path="res://assets/UI - Tiny Asset Pack/Bars.png" id="2_t7ner"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o054f"]
-atlas = ExtResource("1_xmlmj")
-region = Rect2(51, 53, 42, 9)
+atlas = ExtResource("2_t7ner")
+region = Rect2(147, 101, 42, 9)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mdepw"]
-atlas = ExtResource("1_xmlmj")
-region = Rect2(54, 24, 27, 3)
+atlas = ExtResource("2_t7ner")
+region = Rect2(54, 104, 27, 3)
 
 [node name="MainInterface" type="Control"]
 layout_mode = 3
