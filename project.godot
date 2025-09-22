@@ -12,10 +12,10 @@ config_version=5
 
 config/name="Just Another Farmgame"
 run/main_scene="res://scenes/Game.tscn"
-config/features=PackedStringArray("4.3", "C#", "Forward Plus")
-boot_splash/image="res://icon.png"
+config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 boot_splash/fullsize=false
 boot_splash/use_filter=false
+boot_splash/image="res://icon.png"
 config/icon="res://icon.png"
 
 [debug]
@@ -81,6 +81,5 @@ interaction={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.mobile="forward_plus"
 environment/defaults/default_clear_color=Color(0, 0.572549, 0.866667, 1)
